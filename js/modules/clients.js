@@ -1,43 +1,37 @@
 import { clients } from "../data/clients.js";
+import { saveData, getData } from "../utils/storage.js";
+// Add the exact path to the .esm.all.js file
+import Swal from "../../../node_modules/sweetalert2/dist/sweetalert2.esm.all.js";
 
+let clientList = getData("webflow_clients", clients);
 
-const clientTableBody =
-    document.getElementById("clientTableBody");
+const clientTableBody = document.getElementById("clientTableBody");
+// console.log(clientTableBody)
 
-const clientSearch =
-    document.getElementById("clientSearch");
+const clientSearch = document.getElementById("clientSearch");
 
-const addClientBtn =
-    document.getElementById("addClientBtn");
+const addClientBtn = document.getElementById("addClientBtn");
 
-const clientModal =
-    document.getElementById("clientModal");
+const clientModal = document.getElementById("clientModal");
 
-const closeClientModal =
-    document.getElementById("closeClientModal");
+const closeClientModal = document.getElementById("closeClientModal");
 
-const cancelClientModal =
-    document.getElementById("cancelClientModal");
+const cancelClientModal = document.getElementById("cancelClientModal");
 
-const clientForm =
-    document.getElementById("clientForm");
+const clientForm = document.getElementById("clientForm");
 
-    
 // ========================================
 // Render Clients
 // ========================================
 
 function renderClients(clientList) {
+  clientTableBody.innerHTML = "";
+//   console.log( clientTableBody.outerHTML);
 
-    clientTableBody.innerHTML = "";
+  clientList.forEach((client) => {
+    const row = document.createElement("tr");
 
-
-    clientList.forEach(client => {
-
-        const row = document.createElement("tr");
-
-
-        row.innerHTML = `
+    row.innerHTML = `
 
             <td>
                 <strong>${client.name}</strong>
@@ -62,75 +56,150 @@ function renderClients(clientList) {
             </td>
 
             <td>
+    <button
+        class="btn btn--small client-action"
+        data-action="view"
+        data-id="${client.id}">
+        View
+    </button>
 
-                <button
-                    class="btn btn--small">
+    <button
+        class="btn btn--small client-action"
+        data-action="edit"
+        data-id="${client.id}">
+        Edit
+    </button>
 
-                    View
-
-                </button>
-
-            </td>
+    <button
+        class="btn btn--small client-action"
+        data-action="delete"
+        data-id="${client.id}">
+        Delete
+    </button>
+</td>
 
         `;
 
-
-        clientTableBody.appendChild(row);
-
-    });
-
+    clientTableBody.appendChild(row);
+  });
 }
-
 
 // ========================================
 // Search Clients
 // ========================================
 
 clientSearch.addEventListener("input", () => {
+  const searchTerm = clientSearch.value.toLowerCase();
 
-    const searchTerm =
-        clientSearch.value.toLowerCase();
+  const filteredClients = clientList.filter(
+    (client) =>
+      client.name.toLowerCase().includes(searchTerm) ||
+      client.industry.toLowerCase().includes(searchTerm),
+  );
 
+  renderClients(filteredClients);
+});
 
-    const filteredClients =
-        clients.filter(client =>
+// ========================================
+// Client Actions
+// ========================================
 
-            client.name
-                .toLowerCase()
-                .includes(searchTerm)
+clientTableBody.addEventListener("click", (event) => {
 
-            ||
+    const button =
+        event.target.closest(".client-action");
 
-            client.industry
-                .toLowerCase()
-                .includes(searchTerm)
+    if (!button) {
+        return;
+    }
 
+    const action =
+        button.dataset.action;
+
+    const clientId =
+        Number(button.dataset.id);
+
+    const client =
+        clientList.find(client =>
+            client.id === clientId
         );
 
 
-    renderClients(filteredClients);
+    console.log(client);
+
+
+    // ========================================
+    // View Client
+    // ========================================
+
+    if (action === "view") {
+
+        window.location.href =
+            `client-details.html?id=${clientId}`;
+
+    }
+
+ if (action === "delete") {
+
+    Swal.fire({
+
+        title: "Delete Client?",
+
+        text: `Are you sure you want to delete ${client.name}?`,
+
+        icon: "warning",
+
+        showCancelButton: true,
+
+        confirmButtonText: "Yes, Delete",
+
+        cancelButtonText: "Cancel"
+
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            const clientIndex =
+    clientList.findIndex(client =>
+        client.id === clientId
+    );
+        clientList.splice(clientIndex, 1);
+saveData(
+    "webflow_clients",
+    clientList
+);
+renderClients(clientList);
+
+Swal.fire({
+
+    icon: "success",
+
+    title: "Client Deleted",
+
+    text: `${client.name} has been deleted successfully.`,
+
+    confirmButtonText: "OK"
 
 });
+        }
 
+    });
 
+}
+
+});
 
 // ========================================
 // add client model open
 // ========================================
 addClientBtn.addEventListener("click", () => {
-
-    clientModal.classList.add("modal--visible");
-
+  clientModal.classList.add("modal--visible");
 });
 closeClientModal.addEventListener("click", () => {
-
-    clientModal.classList.remove("modal--visible");
-
+  clientModal.classList.remove("modal--visible");
 });
 cancelClientModal.addEventListener("click", () => {
-
-    clientModal.classList.remove("modal--visible");
-
+  clientModal.classList.remove("modal--visible");
 });
 clientForm.addEventListener("submit", (event) => {
 
@@ -138,18 +207,24 @@ clientForm.addEventListener("submit", (event) => {
 
 
     const name =
-        document.getElementById("clientName").value.trim();
+        document.getElementById("clientName")
+            .value
+            .trim();
 
     const industry =
-        document.getElementById("clientIndustry").value;
+        document.getElementById("clientIndustry")
+            .value;
 
     const websites =
-        Number(document.getElementById("clientWebsites").value);
+        Number(
+            document.getElementById("clientWebsites")
+                .value
+        );
 
 
     const newClient = {
 
-        id: clients.length + 1,
+        id: Date.now(),
 
         name: name,
 
@@ -162,20 +237,45 @@ clientForm.addEventListener("submit", (event) => {
     };
 
 
-    clients.push(newClient);
+    // Add to application data
+    clientList.push(newClient);
 
 
-    renderClients(clients);
+    // Save to Local Storage
+    saveData(
+        "webflow_clients",
+        clientList
+    );
 
 
+    // Refresh table
+    renderClients(clientList);
+
+
+    // Reset form
     clientForm.reset();
 
 
+    // Close modal
     clientModal.classList.remove("modal--visible");
+
+
+    // Show success message
+    Swal.fire({
+
+        icon: "success",
+
+        title: "Client Added!",
+
+        text: `${name} has been added successfully.`,
+
+        confirmButtonText: "OK"
+
+    });
 
 });
 // ========================================
 // Initial Render
 // ========================================
 
-renderClients(clients);
+renderClients(clientList);
