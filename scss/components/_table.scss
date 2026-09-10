@@ -1,0 +1,88 @@
+@use "../abstracts/variables" as *;
+
+
+// ========================================
+// Table Container
+// ========================================
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+
+    background-color: $surface-color;
+
+    border: 1px solid $border-color;
+    border-radius: $border-radius-md;
+
+    box-shadow: $shadow-sm;
+}
+
+
+// ========================================
+// Data Table
+// ========================================
+
+.data-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 700px;
+
+
+    // Table header
+    thead {
+        background-color: $background-color;
+    }
+
+
+    th {
+        padding: 14px 18px;
+
+        color: $text-secondary;
+
+        font-size: 13px;
+        font-weight: 600;
+
+        text-align: left;
+
+        border-bottom: 1px solid $border-color;
+    }
+
+
+    // Table body
+    td {
+        padding: 16px 18px;
+
+        color: $text-secondary;
+
+        font-size: 14px;
+
+        border-bottom: 1px solid $border-color;
+    }
+
+
+    // Remove border from last row
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+
+    // Hover effect
+    tbody tr {
+        transition: $transition;
+
+        &:hover {
+            background-color: $primary-light;
+        }
+    }
+
+
+    // Client name
+    td strong {
+        color: $text-primary;
+
+        font-weight: 600;
+    }
+}

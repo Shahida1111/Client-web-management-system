@@ -1,0 +1,128 @@
+@use "../abstracts/variables" as *;
+
+
+// ========================================
+// Statistics Cards
+// ========================================
+
+.stat-card {
+    background-color: $surface-color;
+
+    border: 1px solid $border-color;
+    border-radius: $border-radius-md;
+
+    padding: 22px;
+
+    box-shadow: $shadow-sm;
+
+    transition: $transition;
+
+
+    // ------------------------------------
+    // Hover
+    // ------------------------------------
+
+    &:hover {
+        box-shadow: $shadow-md;
+        transform: translateY(-2px);
+    }
+
+
+    // ------------------------------------
+    // Top section
+    // ------------------------------------
+
+    &__top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+
+    // ------------------------------------
+    // Icon
+    // ------------------------------------
+
+    &__icon {
+        width: 42px;
+        height: 42px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-color: $primary-light;
+
+        border-radius: $border-radius-sm;
+
+        font-size: 20px;
+    }
+
+
+    // ------------------------------------
+    // Label
+    // ------------------------------------
+
+    &__label {
+        color: $text-secondary;
+
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+
+    // ------------------------------------
+    // Main number
+    // ------------------------------------
+
+    &__value {
+        margin-top: 18px;
+
+        color: $text-primary;
+
+        font-size: 32px;
+        font-weight: 700;
+
+        line-height: 1;
+    }
+
+
+    // ------------------------------------
+    // Footer
+    // ------------------------------------
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        margin-top: 14px;
+
+        color: $text-muted;
+
+        font-size: 12px;
+    }
+
+
+    // ------------------------------------
+    // Status
+    // ------------------------------------
+
+    &__change {
+
+        &--positive {
+            color: $success-color;
+            font-weight: 600;
+        }
+
+        &--warning {
+            color: $warning-color;
+            font-weight: 600;
+        }
+
+        &--danger {
+            color: $danger-color;
+            font-weight: 600;
+        }
+    }
+}

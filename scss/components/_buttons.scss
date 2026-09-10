@@ -1,0 +1,61 @@
+@use "../abstracts/variables" as *;
+
+// ========================================
+// Buttons
+// ========================================
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: $border-radius-sm;
+
+  padding: 10px 16px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: $transition;
+
+  // Primary button
+  &--primary {
+    background-color: $primary-color;
+    color: $white;
+
+    &:hover {
+      background-color: $primary-dark;
+    }
+  }
+  // Secondary button
+  &--secondary {
+    background-color: $surface-color;
+
+    color: $text-secondary;
+
+    border: 1px solid $border-color;
+
+    &:hover {
+      background-color: $background-color;
+      color: $text-primary;
+    }
+  }
+
+  // Small button
+  &--small {
+    padding: 7px 12px;
+
+    background-color: $primary-light;
+    color: $primary-color;
+
+    font-size: 13px;
+
+    &:hover {
+      background-color: $primary-color;
+      color: $white;
+    }
+  }
+}

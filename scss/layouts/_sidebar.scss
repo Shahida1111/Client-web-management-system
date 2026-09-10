@@ -1,0 +1,105 @@
+@use "../abstracts/variables" as *;
+
+.sidebar {
+    width: $sidebar-width;
+    height: 100vh;
+
+    background-color: $dark;
+    color: $white;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 200;
+
+    &__logo {
+        height: 70px;
+
+        display: flex;
+        align-items: center;
+
+        padding: 0 24px;
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        h2 {
+            color: $white;
+            font-size: 20px;
+            margin: 0;
+        }
+
+        span {
+            color: $primary-color;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+    }
+
+    &__nav {
+        padding: 20px 12px;
+        flex: 1;
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        margin-bottom: 5px;
+
+        color: #cbd5e1;
+
+        border-radius: $border-radius-sm;
+        transition: $transition;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            color: $white;
+        }
+
+        &--active {
+            background-color: $primary-color;
+            color: $white;
+        }
+    }
+
+    &__footer {
+        padding: 12px;
+    }
+}
+
+// ========================================
+// Mobile Sidebar
+// ========================================
+
+@media (max-width: $breakpoint-tablet - 1px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform $transition-slow;
+    }
+
+    .sidebar.sidebar--open {
+        transform: translateX(0);
+    }
+
+}
+
+.sidebar-overlay {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background-color: rgba(0, 0, 0, 0.4);
+
+    z-index: 150;
+}
+
+.sidebar-overlay.sidebar-overlay--visible {
+    display: block;
+}

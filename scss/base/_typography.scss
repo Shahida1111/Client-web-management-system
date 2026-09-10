@@ -1,0 +1,39 @@
+@use "../abstracts/variables" as *;
+
+body {
+    font-family: $font-family;
+    color: $text-primary;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $text-primary;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+h2 {
+    font-size: 26px;
+}
+
+h3 {
+    font-size: 22px;
+}
+
+p {
+    color: $text-secondary;
+}
+
+small {
+    font-size: 13px;
+    color: $text-muted;
+}

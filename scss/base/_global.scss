@@ -1,0 +1,24 @@
+@use "../abstracts/variables" as *;
+
+body {
+    background-color: $background-color;
+}
+
+.container {
+    width: 100%;
+    max-width: $breakpoint-large;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.page-title {
+    margin-bottom: 24px;
+}
+
+.text-muted {
+    color: $text-muted;
+}
+
+.text-center {
+    text-align: center;
+}

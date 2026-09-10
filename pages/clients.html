@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clients - WebFlow CMS</title>
+
+    <link rel="stylesheet" href="../css/main.css">
+
+</head>
+
+
+<body>
+
+    <div class="app">
+
+
+        <!-- ============================= -->
+        <!-- Sidebar -->
+        <!-- ============================= -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar__logo">
+                <h2>WebFlow</h2>
+                <span>CMS</span>
+            </div>
+
+
+            <nav class="sidebar__nav">
+
+                <a href="../index.html" class="sidebar__link">
+                    <span>▣</span>
+                    <span>Dashboard</span>
+                </a>
+
+
+                <a href="clients.html"
+                   class="sidebar__link sidebar__link--active">
+
+                    <span>👥</span>
+                    <span>Clients</span>
+
+                </a>
+
+
+                <a href="websites.html" class="sidebar__link">
+
+                    <span>🌐</span>
+                    <span>Websites</span>
+
+                </a>
+
+
+                <a href="#" class="sidebar__link">
+
+                    <span>✓</span>
+                    <span>Tasks</span>
+
+                </a>
+
+
+                <a href="#" class="sidebar__link">
+
+                    <span>⚠</span>
+                    <span>QA</span>
+
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar__footer">
+
+                <a href="#" class="sidebar__link">
+
+                    <span>⚙</span>
+                    <span>Settings</span>
+
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- Mobile Overlay -->
+
+        <div class="sidebar-overlay"
+             id="sidebarOverlay">
+        </div>
+
+
+        <!-- ============================= -->
+        <!-- Main -->
+        <!-- ============================= -->
+
+        <div class="app__main">
+
+
+            <!-- Header -->
+
+            <header class="header">
+
+
+                <div class="header__left">
+
+                    <button
+                        class="header__menu"
+                        id="menuToggle">
+
+                        ☰
+
+                    </button>
+
+
+                    <h1>Clients</h1>
+
+                </div>
+
+
+                <div class="header__right">
+
+
+                    <button class="header__notification">
+
+                        🔔
+
+                    </button>
+
+
+                    <div class="header__user">
+
+                        <div class="header__avatar">
+                            SI
+                        </div>
+
+
+                        <div class="header__user-info">
+
+                            <strong>
+                                Shahida Ibrahim
+                            </strong>
+
+                            <span>
+                                Web Developer
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- ============================= -->
+            <!-- Page Content -->
+            <!-- ============================= -->
+
+            <main class="main-content">
+
+
+                <div class="container">
+
+
+                    <!-- Page heading -->
+
+                    <div class="page-heading">
+
+
+                        <div>
+
+                            <h2>
+                                Clients
+                            </h2>
+
+                            <p>
+                                Manage your clients and their websites.
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            class="btn btn--primary"
+                            id="addClientBtn">
+
+                            + Add Client
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- Search -->
+
+                    <div class="client-toolbar">
+
+                        <div class="search-box">
+
+                            <input
+                                type="text"
+                                id="clientSearch"
+                                placeholder="Search clients...">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Client table -->
+
+                    <div class="table-container">
+
+                        <table class="data-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Client</th>
+
+                                    <th>Industry</th>
+
+                                    <th>Websites</th>
+
+                                    <th>Status</th>
+
+                                    <th>Action</th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="clientTableBody">
+
+                                <!-- JavaScript will insert clients here -->
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <!-- ============================= -->
+<!-- Add Client Modal -->
+<!-- ============================= -->
+
+<div class="modal" id="clientModal">
+
+    <div class="modal__content">
+
+        <!-- Modal Header -->
+
+        <div class="modal__header">
+
+            <div>
+                <h3>Add New Client</h3>
+                <p>Enter the client information below.</p>
+            </div>
+
+            <button
+                class="modal__close"
+                id="closeClientModal">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <!-- Modal Body -->
+
+        <form id="clientForm">
+
+            <div class="form-group">
+
+                <label for="clientName">
+                    Client Name
+                </label>
+
+                <input
+                    type="text"
+                    id="clientName"
+                    placeholder="Enter client name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="clientIndustry">
+                    Industry
+                </label>
+
+                <select
+                    id="clientIndustry"
+                    required>
+
+                    <option value="">
+                        Select industry
+                    </option>
+
+                    <option value="Hotel">
+                        Hotel
+                    </option>
+
+                    <option value="Restaurant">
+                        Restaurant
+                    </option>
+
+                    <option value="Healthcare">
+                        Healthcare
+                    </option>
+
+                    <option value="eCommerce">
+                        eCommerce
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="clientWebsites">
+                    Number of Websites
+                </label>
+
+                <input
+                    type="number"
+                    id="clientWebsites"
+                    min="0"
+                    value="1"
+                    required>
+
+            </div>
+
+
+            <!-- Modal Actions -->
+
+            <div class="modal__actions">
+
+                <button
+                    type="button"
+                    class="btn btn--secondary"
+                    id="cancelClientModal">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn btn--primary">
+
+                    Add Client
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+    <!-- JavaScript -->
+
+    <script
+        type="module"
+        src="../js/modules/clients.js">
+    </script>
+
+
+</body>
+
+</html>

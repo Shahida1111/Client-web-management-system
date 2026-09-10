@@ -1,23 +1,21 @@
-@import "abstracts/variables";
-@import "abstracts/mixins";
-@import "abstracts/functions";
+@use "abstracts/variables";
+@use "abstracts/mixins";
 
-@import "base/reset";
-@import "base/typography";
-@import "base/global";
+@use "base/reset";
+@use "base/typography";
+@use "base/global";
 
-@import "components/buttons";
-@import "components/cards";
-@import "components/forms";
-@import "components/table";
-@import "components/badge";
-@import "components/sidebar";
+@use "components/buttons";
+@use "components/cards";
+@use "components/forms";
+@use "components/table";
+@use "components/badge";
 
-@import "layouts/header";
-@import "layouts/sidebar";
-@import "layouts/grid";
+@use "layouts/header";
+@use "layouts/sidebar";
+@use "layouts/grid";
 
-@import "pages/login";
-@import "pages/dashboard";
-@import "pages/clients";
-@import "pages/websites";
+@use "pages/login";
+@use "pages/dashboard";
+@use "pages/clients";
+@use "pages/websites";
